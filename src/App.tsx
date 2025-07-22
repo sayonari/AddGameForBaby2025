@@ -8,7 +8,7 @@ import { ResultScreen } from './components/ResultScreen';
 import { VoiceGameScreen } from './components/VoiceGameScreen';
 import { ShopScreen } from './components/ShopScreen';
 import { AchievementsScreen } from './components/AchievementsScreen';
-import { checkAchievements, checkPurchaseAchievements, ACHIEVEMENTS } from './utils/achievements';
+import { checkAchievements, checkPurchaseAchievements } from './utils/achievements';
 import { motion } from 'framer-motion';
 
 function App() {

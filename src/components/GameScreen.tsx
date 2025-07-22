@@ -15,7 +15,7 @@ interface GameScreenProps {
   onGoHome: () => void;
 }
 
-export const GameScreen: React.FC<GameScreenProps> = ({ mode, player, onEndGame, onGoHome }) => {
+export const GameScreen: React.FC<GameScreenProps> = ({ mode, onEndGame, onGoHome }) => {
   const [problem, setProblem] = useState<Problem>(() => generateProblem(1));
   const [userAnswer, setUserAnswer] = useState<string>('');
   const [score, setScore] = useState(0);

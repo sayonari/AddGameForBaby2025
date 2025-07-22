@@ -2,7 +2,7 @@ import React, { useState, useEffect, useCallback } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Home, Mic, MicOff } from 'lucide-react';
 import type { Problem, Player } from '../types/game';
-import { generateProblem, checkAnswer, formatTime } from '../utils/gameLogic';
+import { generateProblem, checkAnswer } from '../utils/gameLogic';
 import { speechService } from '../utils/speech';
 import { soundService } from '../utils/sound';
 import { voiceRecognitionService } from '../utils/voiceRecognition';
@@ -14,7 +14,7 @@ interface VoiceGameScreenProps {
   onGoHome: () => void;
 }
 
-export const VoiceGameScreen: React.FC<VoiceGameScreenProps> = ({ player, onEndGame, onGoHome }) => {
+export const VoiceGameScreen: React.FC<VoiceGameScreenProps> = ({ onGoHome }) => {
   const [problem, setProblem] = useState<Problem>(() => generateProblem(1));
   const [userAnswer, setUserAnswer] = useState<string>('');
   const [score, setScore] = useState(0);
@@ -24,8 +24,6 @@ export const VoiceGameScreen: React.FC<VoiceGameScreenProps> = ({ player, onEndG
   const [level, setLevel] = useState(1);
   const [isListening, setIsListening] = useState(false);
   const [isSupported, setIsSupported] = useState(true);
-  const [correctCount, setCorrectCount] = useState(0);
-  const [maxStreak, setMaxStreak] = useState(0);
 
   useEffect(() => {
     if (!voiceRecognitionService.isSupported()) {
@@ -64,13 +62,8 @@ export const VoiceGameScreen: React.FC<VoiceGameScreenProps> = ({ player, onEndG
         speechService.speakCorrect();
         setIsCorrect(true);
         setScore(prev => prev + 10 + streak);
-        setStreak(prev => {
-          const newStreak = prev + 1;
-          setMaxStreak(current => Math.max(current, newStreak));
-          return newStreak;
-        });
+        setStreak(prev => prev + 1);
         setProblemCount(prev => prev + 1);
-        setCorrectCount(prev => prev + 1);
 
         setTimeout(() => {
           setProblem(generateProblem(level));

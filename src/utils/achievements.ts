@@ -169,7 +169,6 @@ export function checkAchievements(player: Player, gameMode?: string, sessionScor
   }
 
   // 連続正解による実績
-  const currentStreak = player.stats.currentStreak;
   const bestStreak = player.stats.bestStreak;
   if (bestStreak >= 5 && !player.achievements.find(a => a.id === 'streak_5')?.unlocked) {
     newlyUnlocked.push(unlockAchievement('streak_5', player));

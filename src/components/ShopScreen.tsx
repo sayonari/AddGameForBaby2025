@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
-import { Home, ShoppingBag, Clock, Star, Shield, Sparkles } from 'lucide-react';
+import { Home, ShoppingBag } from 'lucide-react';
 import type { Player, Item } from '../types/game';
 import { soundService } from '../utils/sound';
 
