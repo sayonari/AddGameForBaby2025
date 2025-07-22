@@ -1,69 +1,129 @@
-# React + TypeScript + Vite
+# たのしい たしざんゲーム 🎮
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+**[→ いますぐあそぶ！](https://sayonari.github.io/AddGameForBaby2025/)**
 
-Currently, two official plugins are available:
+4〜5歳のお子様向けの楽しい足し算学習ゲームです。iPhone/iPadのブラウザで簡単に遊べます！
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## 🌟 特徴
 
-## Expanding the ESLint configuration
+### 🎯 4つのゲームモード
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+1. **30びょうチャレンジ** ⏱️
+   - 30秒間でどれだけ問題を解けるか挑戦！
+   - スピード感のある楽しいゲームプレイ
 
-```js
-export default tseslint.config([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+2. **エンドレスモード** ♾️
+   - 間違えるまで続く緊張感のあるモード
+   - 集中力と正確性が試されます
 
-      // Remove tseslint.configs.recommended and replace with this
-      ...tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      ...tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      ...tseslint.configs.stylisticTypeChecked,
+3. **れんしゅうモード** 📝
+   - 時間制限なしでじっくり練習
+   - 自分のペースで学習できます
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+4. **こえでこたえる** 🎤
+   - 音声認識で答えを入力
+   - 「いち」「に」「さん」と声で答えます
+
+### 🎨 子ども向けの工夫
+
+- **ビジュアル表示** 🍎🍊🍓
+  - 数字だけでなく、果物の絵で数を表現
+  - 視覚的に理解しやすい設計
+
+- **大きなボタン** 👆
+  - 小さな指でも押しやすい大きなテンキー
+  - 数字と一緒にドット表示で数の概念を学習
+
+- **音声サポート** 🔊
+  - 問題を音声で読み上げ
+  - 数字ボタンを押すと音声で数字を読み上げ
+  - 正解・不正解を音声でフィードバック
+
+- **楽しいBGMと効果音** 🎵
+  - 明るく楽しい背景音楽
+  - 達成感のある効果音
+
+### 🏆 実績システム
+
+20種類以上の実績を用意！
+- はじめてのせいかい 🌟
+- 10もんせいかい ⭐
+- 5れんぞく 🔥
+- 100てんとっぱ 💯
+- こえのたつじん 🎤
+- その他多数...
+
+### 🛍️ アイテムショップ
+
+ゲームで稼いだコインでアイテムを購入！
+- 時間ボーナス
+- スコア倍増
+- ヒント機能
+- その他パワーアップ
+
+### 📱 技術的な特徴
+
+- **PWA対応** - ホーム画面に追加して、アプリのように使える
+- **オフライン対応** - 一度読み込めばインターネット接続なしでも遊べる
+- **レスポンシブデザイン** - スマホ・タブレット・PCどれでも快適
+- **データ保存** - 進捗は自動的に保存されます
+
+## 🚀 使い方
+
+1. [ゲームページ](https://sayonari.github.io/AddGameForBaby2025/)にアクセス
+2. 遊びたいモードを選択
+3. 表示された問題に答える
+4. コインを集めてアイテムを購入
+5. 実績を解除して全クリアを目指そう！
+
+## 💻 開発者向け情報
+
+### セットアップ
+
+```bash
+# リポジトリをクローン
+git clone https://github.com/sayonari/AddGameForBaby2025.git
+cd AddGameForBaby2025
+
+# 依存関係をインストール
+npm install
+
+# 開発サーバーを起動
+npm run dev
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+### ビルド
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+```bash
+# プロダクションビルド
+npm run build
 
-export default tseslint.config([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+# ビルドしたファイルをプレビュー
+npm run preview
 ```
+
+### 技術スタック
+
+- **React** + **TypeScript** - モダンなフロントエンド開発
+- **Vite** - 高速なビルドツール
+- **Framer Motion** - スムーズなアニメーション
+- **Web Speech API** - 音声合成と音声認識
+- **Web Audio API** - BGMと効果音の生成
+
+## 📝 ライセンス
+
+MIT License
+
+## 🤝 貢献
+
+バグ報告や機能提案は[Issues](https://github.com/sayonari/AddGameForBaby2025/issues)からお願いします。
+
+## 👨‍👩‍👧‍👦 対象年齢
+
+4歳〜5歳のお子様（未就学児）
+
+小学生以上のお子様には簡単すぎるかもしれませんが、音声認識モードは面白いかもしれません！
+
+---
+
+Made with ❤️ for kids learning math
