@@ -1,4 +1,4 @@
-// Viewport scaling utility - removed as we're using CSS-only solution
+// No scaling needed - using pure CSS responsive design
 export const initializeScaling = () => {
-  // No longer needed - using pure CSS solution
+  // Empty function - all scaling handled by CSS
 };

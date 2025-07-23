@@ -78,7 +78,7 @@ export const HomeScreen: React.FC<HomeScreenProps> = ({
 
       <div className="game-modes">
         <motion.button
-          className="mode-button time-attack"
+          className="mode-button timeAttack"
           onClick={() => handleStartGame('timeAttack')}
           whileHover={{ scale: 1.05 }}
           whileTap={{ scale: 0.95 }}
