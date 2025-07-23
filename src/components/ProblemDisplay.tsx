@@ -21,30 +21,31 @@ export const ProblemDisplay: React.FC<ProblemDisplayProps> = ({ problem, isCorre
     
     for (let i = 0; i < displayCount; i++) {
       items.push(
-        <motion.span
+        <span
           key={i}
           className="visual-item"
-          initial={{ scale: 0, rotate: -180 }}
-          animate={{ scale: 1, rotate: 0 }}
-          transition={{ delay: i * 0.05, type: "spring" }}
+          style={{ 
+            display: 'inline-block',
+            animation: `popIn 0.3s ${i * 0.05}s both`
+          }}
         >
           {icon}
-        </motion.span>
+        </span>
       );
     }
     
     // 10個を超える場合は「...」を表示
     if (num > maxVisualItems) {
       items.push(
-        <motion.span
+        <span
           key="more"
           className="visual-more"
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ delay: 0.5 }}
+          style={{ 
+            animation: 'fadeIn 0.3s 0.5s both'
+          }}
         >
           +{num - maxVisualItems}
-        </motion.span>
+        </span>
       );
     }
     
@@ -54,74 +55,25 @@ export const ProblemDisplay: React.FC<ProblemDisplayProps> = ({ problem, isCorre
   return (
     <div className="problem-display">
       <div className="problem-visual">
-        {level <= 2 && problem.num1 <= 15 && problem.num2 <= 15 && (
-          <>
-            <div className="number-group">
-              {renderVisualNumber(problem.num1)}
-              <div className="number-text">{problem.num1}</div>
-            </div>
-            
-            <motion.div 
-              className="operator"
-              animate={{ scale: [1, 1.2, 1] }}
-              transition={{ duration: 1, repeat: Infinity }}
-            >
-              +
-            </motion.div>
-            
-            <div className="number-group">
-              {renderVisualNumber(problem.num2)}
-              <div className="number-text">{problem.num2}</div>
-            </div>
-          </>
-        )}
-      </div>
-
-      <div className="problem-text">
-        <motion.span 
-          className="number"
-          initial={{ opacity: 0, x: -20 }}
-          animate={{ opacity: 1, x: 0 }}
-          transition={{ delay: 0.1 }}
-        >
-          {problem.num1}
-        </motion.span>
+        <div className="number-group">
+          {renderVisualNumber(problem.num1)}
+          <div className="number-text">{problem.num1}</div>
+        </div>
         
-        <motion.span 
+        <motion.div 
           className="operator"
-          initial={{ opacity: 0, scale: 0 }}
-          animate={{ opacity: 1, scale: 1 }}
-          transition={{ delay: 0.2 }}
-        >
-          +
-        </motion.span>
-        
-        <motion.span 
-          className="number"
-          initial={{ opacity: 0, x: 20 }}
-          animate={{ opacity: 1, x: 0 }}
-          transition={{ delay: 0.3 }}
-        >
-          {problem.num2}
-        </motion.span>
-        
-        <motion.span 
-          className="equals"
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ delay: 0.4 }}
-        >
-          =
-        </motion.span>
-        
-        <motion.span 
-          className="question"
-          animate={{ scale: [1, 1.1, 1] }}
+          animate={{ scale: [1, 1.2, 1] }}
           transition={{ duration: 1, repeat: Infinity }}
         >
-          ?
-        </motion.span>
+          +
+        </motion.div>
+        
+        <div className="number-group">
+          {renderVisualNumber(problem.num2)}
+          <div className="number-text">{problem.num2}</div>
+        </div>
       </div>
+
 
       {isCorrect === true && (
         <motion.div

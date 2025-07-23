@@ -22,7 +22,7 @@ export const GameScreen: React.FC<GameScreenProps> = ({ mode, difficulty, onEndG
   const [userAnswer, setUserAnswer] = useState<string>('');
   const [score, setScore] = useState(0);
   const [streak, setStreak] = useState(0);
-  const [timeRemaining, setTimeRemaining] = useState(mode === 'timeAttack' ? 30 : -1);
+  const [timeRemaining, setTimeRemaining] = useState(mode === 'timeAttack' ? 120 : -1);
   const [isCorrect, setIsCorrect] = useState<boolean | null>(null);
   const [problemCount, setProblemCount] = useState(0);
   const [level, setLevel] = useState(1);

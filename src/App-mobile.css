@@ -55,10 +55,7 @@
     font-size: 1.2rem;
   }
   
-  .problem-text {
-    font-size: 3rem;
-    gap: 15px;
-  }
+  /* Problem text removed - only visual display with emojis */
   
   .operator {
     font-size: 2.5rem;
@@ -95,10 +92,7 @@
     font-size: 0.6rem;
   }
   
-  .action-buttons {
-    gap: 10px;
-  }
-  
+  /* Action buttons now integrated in number grid */
   .action-button {
     padding: 10px 15px;
     font-size: 1rem;
@@ -152,9 +146,7 @@
     font-size: 1.2rem;
   }
   
-  .problem-text {
-    font-size: 2.5rem;
-  }
+  /* Problem text removed - only visual display with emojis */
   
   .operator {
     font-size: 2rem;
@@ -207,10 +199,6 @@
   
   .number-grid {
     flex: 1;
-  }
-  
-  .action-buttons {
-    flex-direction: column;
   }
 }
 

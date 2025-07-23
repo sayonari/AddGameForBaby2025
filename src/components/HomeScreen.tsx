@@ -87,7 +87,7 @@ export const HomeScreen: React.FC<HomeScreenProps> = ({
           transition={{ delay: 0.1 }}
         >
           <Play size={40} />
-          <span>30びょう チャレンジ</span>
+          <span>120びょう チャレンジ</span>
         </motion.button>
 
         <motion.button
