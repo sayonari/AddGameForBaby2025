@@ -6,7 +6,7 @@ import { soundService } from '../utils/sound';
 import { DifficultySelector } from './DifficultySelector';
 
 interface HomeScreenProps {
-  onStartGame: (mode: GameMode) => void;
+  onStartGame: (mode: GameMode, difficulty: number) => void;
   onOpenShop: () => void;
   onOpenAchievements: () => void;
 }
@@ -39,7 +39,7 @@ export const HomeScreen: React.FC<HomeScreenProps> = ({
 
   const handleStartGame = async (mode: GameMode) => {
     await initializeAudio();
-    onStartGame(mode);
+    onStartGame(mode, difficulty);
   };
 
   const handleOpenShop = async () => {
@@ -191,23 +191,36 @@ export const HomeScreen: React.FC<HomeScreenProps> = ({
         animate={{ opacity: 1 }}
         transition={{ delay: 0.6 }}
       >
-        {[...Array(5)].map((_, i) => (
-          <motion.div
-            key={i}
-            className="star"
-            animate={{
-              y: [0, -20, 0],
-              rotate: [0, 180, 360],
-            }}
-            transition={{
-              duration: 3,
-              repeat: Infinity,
-              delay: i * 0.2,
-            }}
-          >
-            ⭐
-          </motion.div>
-        ))}
+        {[...Array(5)].map((_, i) => {
+          const positions = [
+            { left: '10%', top: '15%' },
+            { left: '85%', top: '20%' },
+            { left: '15%', top: '70%' },
+            { left: '80%', top: '65%' },
+            { left: '50%', top: '10%' }
+          ];
+          return (
+            <motion.div
+              key={i}
+              className="star"
+              style={{
+                left: positions[i].left,
+                top: positions[i].top
+              }}
+              animate={{
+                y: [0, -20, 0],
+                rotate: [0, 180, 360],
+              }}
+              transition={{
+                duration: 3,
+                repeat: Infinity,
+                delay: i * 0.2,
+              }}
+            >
+              ⭐
+            </motion.div>
+          );
+        })}
       </motion.div>
     </div>
   );

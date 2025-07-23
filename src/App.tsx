@@ -55,8 +55,10 @@ function App() {
     initializeScaling();
   }, []);
 
-  const handleStartGame = (mode: GameMode) => {
+  const handleStartGame = (mode: GameMode, difficulty: number) => {
     setGameMode(mode);
+    setGameDifficulty(difficulty);
+    localStorage.setItem('gameDifficulty', difficulty.toString());
     setGameState('playing');
   };
 

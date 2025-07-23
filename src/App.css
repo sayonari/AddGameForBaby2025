@@ -301,6 +301,7 @@ body::before {
 .problem-display {
   flex-shrink: 0;
   margin-bottom: 10px;
+  position: relative;
 }
 
 .problem-visual {
@@ -448,6 +449,24 @@ body::before {
   font-size: 0.9rem;
   font-weight: bold;
   transition: all 0.2s ease;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 3px;
+  padding: 8px 5px;
+}
+
+.action-button svg {
+  width: 22px;
+  height: 22px;
+}
+
+.action-button span {
+  display: block;
+  text-align: center;
+  line-height: 1;
+  font-size: 0.75rem;
 }
 
 .action-button.clear {
@@ -821,7 +840,7 @@ body::before {
 /* Celebration */
 .celebration {
   position: fixed;
-  top: 50%;
+  top: 40%;
   left: 50%;
   transform: translate(-50%, -50%);
   font-size: 1.8rem;
@@ -833,34 +852,22 @@ body::before {
   z-index: 100;
   white-space: nowrap;
   box-shadow: 0 10px 40px rgba(79, 172, 254, 0.4);
-  animation: celebrationPop 0.5s ease-out;
-}
-
-@keyframes celebrationPop {
-  0% {
-    transform: translate(-50%, -50%) scale(0);
-    opacity: 0;
-  }
-  50% {
-    transform: translate(-50%, -50%) scale(1.1);
-  }
-  100% {
-    transform: translate(-50%, -50%) scale(1);
-    opacity: 1;
-  }
 }
 
 /* Feedback */
 .feedback {
   position: absolute;
-  top: 50%;
+  bottom: -60px;
   left: 50%;
-  transform: translate(-50%, -50%);
+  transform: translateX(-50%);
   font-size: 1.5rem;
   font-weight: bold;
-  padding: 10px 20px;
+  padding: 10px 30px;
   border-radius: 15px;
   z-index: 10;
+  white-space: nowrap;
+  min-width: 200px;
+  text-align: center;
 }
 
 .feedback.correct {
