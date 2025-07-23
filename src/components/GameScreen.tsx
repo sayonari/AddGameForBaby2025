@@ -40,10 +40,20 @@ export const GameScreen: React.FC<GameScreenProps> = ({ mode, difficulty, onEndG
     // ゲーム開始時に履歴をクリア
     problemHistory.clear();
     
+    // スクロールを無効化
+    const originalStyle = document.body.style.cssText;
+    document.body.style.overflow = 'hidden';
+    document.body.style.position = 'fixed';
+    document.body.style.width = '100%';
+    document.body.style.height = '100%';
+    
     return () => {
       soundService.stopBGM();
       // ゲーム終了時にも履歴をクリア
       problemHistory.clear();
+      
+      // スクロールを元に戻す
+      document.body.style.cssText = originalStyle;
     };
   }, []);
 
