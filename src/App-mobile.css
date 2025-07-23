@@ -31,128 +31,78 @@
     -webkit-user-select: none;
     user-select: none;
   }
-}
-
-/* iOS Safari specific fixes */
-@supports (-webkit-appearance: none) and (stroke-color: transparent) {
-  .app {
-    /* Prevent rubber band scrolling */
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-  }
-}
-
-/* Landscape adjustments for phones */
-@media (orientation: landscape) and (max-height: 500px) {
-  .app-container {
-    --design-width: 1024;
-    --design-height: 600;
-  }
   
-  .game-screen {
-    height: 500px;
-  }
-  
-  .game-content {
-    flex-direction: row;
-    gap: 20px;
-  }
-  
-  .problem-display,
-  .answer-display {
-    flex: 1;
-  }
-  
-  .number-pad {
-    flex: 1;
-    margin-top: 0;
-  }
-}
-
-/* Small phones (iPhone SE, etc.) */
-@media (max-width: 375px) and (max-height: 667px) {
-  .app-container {
-    --design-width: 375;
-    --design-height: 667;
-  }
-}
-
-/* Medium phones */
-@media (min-width: 376px) and (max-width: 414px) and (max-height: 896px) {
-  .app-container {
-    --design-width: 414;
-    --design-height: 896;
-  }
-}
-
-/* Large phones and small tablets */
-@media (min-width: 415px) and (max-width: 768px) and (orientation: portrait) {
-  .app-container {
-    --design-width: 768;
-    --design-height: 1024;
-  }
-}
-
-/* Tablets in landscape */
-@media (min-width: 769px) and (orientation: landscape) {
-  .app-container {
-    --design-width: 1024;
-    --design-height: 768;
-  }
-}
-
-/* Ensure interactive elements remain clickable after scaling */
-.app-container * {
-  /* Prevent issues with scaled touch targets */
-  transform-style: preserve-3d;
-}
-
-/* Fix for achievement notification positioning */
-.achievement-notification {
-  position: fixed;
-  top: 20px;
-  right: 20px;
-  /* Account for scaling */
-  transform-origin: top right;
-}
-
-/* Voice game specific mobile adjustments */
-.voice-button {
-  /* Ensure voice button is easily tappable */
-  min-width: 100px;
-  min-height: 100px;
-}
-
-/* Scrollbar improvements for touch devices */
-@media (hover: none) {
-  .shop-screen::-webkit-scrollbar,
-  .achievements-screen::-webkit-scrollbar {
-    width: 0;
-    display: none;
-  }
-  
-  .shop-screen,
-  .achievements-screen {
-    -webkit-overflow-scrolling: touch;
-    scrollbar-width: none;
-  }
-}
-
-/* Prevent zoom on input focus (iOS) */
-@media (hover: none) and (pointer: coarse) {
-  input,
-  select,
-  textarea {
-    font-size: 16px !important;
+  /* Improve button feedback */
+  .number-button:active,
+  .action-button:active {
+    transform: scale(0.95);
   }
 }
 
 /* Safe area insets for devices with notches */
-@supports (padding: max(0px)) {
-  .app-container {
-    padding: env(safe-area-inset-top) env(safe-area-inset-right) env(safe-area-inset-bottom) env(safe-area-inset-left);
+@supports (padding-top: env(safe-area-inset-top)) {
+  .app {
+    padding-top: env(safe-area-inset-top);
+    padding-bottom: env(safe-area-inset-bottom);
+    padding-left: env(safe-area-inset-left);
+    padding-right: env(safe-area-inset-right);
+  }
+}
+
+/* iOS specific fixes */
+@supports (-webkit-touch-callout: none) {
+  /* Prevent scrolling on game screen */
+  .game-screen-playing {
+    position: fixed;
+    overflow: hidden;
+    -webkit-overflow-scrolling: touch;
+  }
+  
+  /* Fix input focus zoom on iOS */
+  input, textarea, select {
+    font-size: 16px !important;
+  }
+}
+
+/* Small screen adjustments */
+@media (max-width: 400px) {
+  .game-header {
+    gap: 10px;
+  }
+  
+  .score-display,
+  .timer {
+    font-size: 1rem;
+  }
+  
+  .home-screen h1 {
+    font-size: 2rem;
+  }
+  
+  .mode-button span {
+    font-size: 1rem;
+  }
+}
+
+/* Very small screens (iPhone SE) */
+@media (max-height: 600px) {
+  .game-screen {
+    padding: 15px;
+  }
+  
+  .game-header {
+    margin-bottom: 15px;
+  }
+  
+  .problem-display {
+    margin-bottom: 15px;
+  }
+  
+  .number-pad {
+    gap: 10px;
+  }
+  
+  .number-button {
+    height: 50px;
   }
 }

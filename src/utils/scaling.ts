@@ -2,22 +2,23 @@
 export const calculateScale = () => {
   const viewportWidth = window.innerWidth;
   const viewportHeight = window.innerHeight;
-  const isPortrait = viewportHeight > viewportWidth;
   
-  // Design dimensions based on orientation
-  const designWidth = isPortrait ? 768 : 1024;
-  const designHeight = isPortrait ? 1024 : 768;
+  // Always use portrait dimensions to maintain consistent layout
+  const designWidth = 414; // iPhone Pro Max width
+  const designHeight = 896; // iPhone Pro Max height
+  const paddingVertical = 20; // Safe area padding
   
-  // Calculate scale factors
+  // Calculate scale factors with padding
+  const availableHeight = viewportHeight - (paddingVertical * 2);
   const scaleX = viewportWidth / designWidth;
-  const scaleY = viewportHeight / designHeight;
+  const scaleY = availableHeight / designHeight;
   
   // Use the smaller scale to ensure content fits
   const scale = Math.min(scaleX, scaleY);
   
   // Apply limits to prevent excessive scaling
   const minScale = 0.5;
-  const maxScale = 2;
+  const maxScale = 1; // Don't scale up beyond original size
   
   return Math.max(minScale, Math.min(maxScale, scale));
 };
