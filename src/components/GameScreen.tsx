@@ -10,13 +10,14 @@ import { ProblemDisplay } from './ProblemDisplay';
 
 interface GameScreenProps {
   mode: GameMode;
+  difficulty: number;
   player: Player;
   onEndGame: (score: number, problemsSolved: number, correctAnswers: number, maxStreak: number) => void;
   onGoHome: () => void;
 }
 
-export const GameScreen: React.FC<GameScreenProps> = ({ mode, onEndGame, onGoHome }) => {
-  const [problem, setProblem] = useState<Problem>(() => generateProblem(1));
+export const GameScreen: React.FC<GameScreenProps> = ({ mode, difficulty, onEndGame, onGoHome }) => {
+  const [problem, setProblem] = useState<Problem>(() => generateProblem(1, difficulty));
   const [userAnswer, setUserAnswer] = useState<string>('');
   const [score, setScore] = useState(0);
   const [streak, setStreak] = useState(0);
@@ -105,7 +106,7 @@ export const GameScreen: React.FC<GameScreenProps> = ({ mode, onEndGame, onGoHom
       setCorrectCount(prev => prev + 1);
 
       setTimeout(() => {
-        setProblem(generateProblem(level));
+        setProblem(generateProblem(level, difficulty));
         setUserAnswer('');
         setIsCorrect(null);
       }, 1500);
@@ -128,7 +129,7 @@ export const GameScreen: React.FC<GameScreenProps> = ({ mode, onEndGame, onGoHom
         }, 1000);
       }
     }
-  }, [userAnswer, problem, streak, level, mode, score, problemCount, correctCount, maxStreak, onEndGame, isMuted]);
+  }, [userAnswer, problem, streak, level, difficulty, mode, score, problemCount, correctCount, maxStreak, onEndGame, isMuted]);
 
   const toggleMute = () => {
     const newMuted = !isMuted;

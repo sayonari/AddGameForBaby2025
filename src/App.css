@@ -260,9 +260,9 @@ body {
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  font-size: 2rem;
+  font-size: 1.5rem;
   font-weight: bold;
-  padding: 20px 40px;
+  padding: 15px 25px;
   border-radius: 20px;
   z-index: 10;
   white-space: nowrap;
@@ -355,6 +355,10 @@ body {
 .number-dots {
   font-size: 0.8rem;
   color: #f5576c;
+  line-height: 1.2;
+  display: block;
+  margin-top: 5px;
+  text-align: center;
 }
 
 .number-button:nth-child(10) {
@@ -1099,6 +1103,60 @@ body {
   font-size: 1rem;
   color: #667eea;
   margin: 0;
+}
+
+/* Difficulty Selector */
+.difficulty-selector {
+  margin: 20px 0;
+  padding: 20px;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 20px;
+}
+
+.difficulty-selector h3 {
+  font-size: 1.2rem;
+  color: #667eea;
+  margin-bottom: 15px;
+  text-align: center;
+}
+
+.difficulty-options {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 10px;
+}
+
+.difficulty-option {
+  background: white;
+  border: 3px solid;
+  border-radius: 15px;
+  padding: 15px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 5px;
+}
+
+.difficulty-option:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+}
+
+.difficulty-option.active {
+  color: white;
+  transform: scale(1.05);
+}
+
+.difficulty-label {
+  font-size: 1.1rem;
+  font-weight: bold;
+}
+
+.difficulty-range {
+  font-size: 0.9rem;
+  opacity: 0.8;
 }
 
 /* Responsive Design */

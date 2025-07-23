@@ -1,33 +1,40 @@
 import type { Problem } from '../types/game';
 
-export const generateProblem = (level: number): Problem => {
-  let maxSum = 5;
+export const generateProblem = (level: number, difficulty: number = 1): Problem => {
+  let min = 1;
+  let max = 5;
   
-  switch (level) {
-    case 1:
-      maxSum = 5;
+  // 難易度に応じて数値の範囲を設定
+  switch (difficulty) {
+    case 1: // かんたん (1-5)
+      min = 1;
+      max = 5;
       break;
-    case 2:
-      maxSum = 10;
+    case 2: // ふつう (1-10)
+      min = 1;
+      max = 10;
       break;
-    case 3:
-      maxSum = 20;
+    case 3: // むずかしい (5-15)
+      min = 5;
+      max = 15;
       break;
-    case 4:
-      maxSum = 30;
+    case 4: // とてもむずかしい (10-20)
+      min = 10;
+      max = 20;
       break;
-    default:
-      maxSum = 10;
   }
   
-  const answer = Math.floor(Math.random() * maxSum) + 1;
-  const num1 = Math.floor(Math.random() * answer) + 1;
-  const num2 = answer - num1;
+  // レベルによる微調整（10問ごとに少し難しくなる）
+  const levelBonus = Math.floor(level / 10);
+  max = Math.min(max + levelBonus, 25);
+  
+  const num1 = Math.floor(Math.random() * (max - min + 1)) + min;
+  const num2 = Math.floor(Math.random() * (max - min + 1)) + min;
   
   return {
     num1,
     num2,
-    answer,
+    answer: num1 + num2,
   };
 };
 

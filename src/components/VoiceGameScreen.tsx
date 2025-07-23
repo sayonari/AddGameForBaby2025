@@ -9,13 +9,14 @@ import { voiceRecognitionService } from '../utils/voiceRecognition';
 import { ProblemDisplay } from './ProblemDisplay';
 
 interface VoiceGameScreenProps {
+  difficulty: number;
   player: Player;
   onEndGame: (score: number, problemsSolved: number, correctAnswers: number, maxStreak: number) => void;
   onGoHome: () => void;
 }
 
-export const VoiceGameScreen: React.FC<VoiceGameScreenProps> = ({ onGoHome }) => {
-  const [problem, setProblem] = useState<Problem>(() => generateProblem(1));
+export const VoiceGameScreen: React.FC<VoiceGameScreenProps> = ({ difficulty, onGoHome }) => {
+  const [problem, setProblem] = useState<Problem>(() => generateProblem(1, difficulty));
   const [userAnswer, setUserAnswer] = useState<string>('');
   const [score, setScore] = useState(0);
   const [streak, setStreak] = useState(0);
@@ -66,7 +67,7 @@ export const VoiceGameScreen: React.FC<VoiceGameScreenProps> = ({ onGoHome }) =>
         setProblemCount(prev => prev + 1);
 
         setTimeout(() => {
-          setProblem(generateProblem(level));
+          setProblem(generateProblem(level, difficulty));
           setUserAnswer('');
           setIsCorrect(null);
         }, 2000);

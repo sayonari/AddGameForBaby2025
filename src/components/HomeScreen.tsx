@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import { motion } from 'framer-motion';
-import { Play, Trophy, ShoppingBag, Mic } from 'lucide-react';
+import { Play, Trophy, ShoppingBag, Mic, Settings } from 'lucide-react';
 import type { GameMode } from '../types/game';
 import { soundService } from '../utils/sound';
+import { DifficultySelector } from './DifficultySelector';
 
 interface HomeScreenProps {
   onStartGame: (mode: GameMode) => void;
@@ -16,6 +17,11 @@ export const HomeScreen: React.FC<HomeScreenProps> = ({
   onOpenAchievements 
 }) => {
   const [audioInitialized, setAudioInitialized] = useState(false);
+  const [showDifficulty, setShowDifficulty] = useState(false);
+  const [difficulty, setDifficulty] = useState(() => {
+    const saved = localStorage.getItem('gameDifficulty');
+    return saved ? parseInt(saved) : 1;
+  });
 
   const initializeAudio = async () => {
     if (!audioInitialized) {
@@ -44,6 +50,18 @@ export const HomeScreen: React.FC<HomeScreenProps> = ({
   const handleOpenAchievements = async () => {
     await initializeAudio();
     onOpenAchievements();
+  };
+
+  const handleDifficultyChange = (newDifficulty: number) => {
+    setDifficulty(newDifficulty);
+    localStorage.setItem('gameDifficulty', newDifficulty.toString());
+    soundService.playSound('click');
+  };
+
+  const toggleDifficulty = async () => {
+    await initializeAudio();
+    setShowDifficulty(!showDifficulty);
+    soundService.playSound('click');
   };
 
   return (
@@ -112,6 +130,20 @@ export const HomeScreen: React.FC<HomeScreenProps> = ({
         </motion.button>
       </div>
 
+      {showDifficulty && (
+        <motion.div 
+          initial={{ opacity: 0, y: -20 }}
+          animate={{ opacity: 1, y: 0 }}
+          exit={{ opacity: 0, y: -20 }}
+          transition={{ duration: 0.3 }}
+        >
+          <DifficultySelector 
+            difficulty={difficulty} 
+            onDifficultyChange={handleDifficultyChange} 
+          />
+        </motion.div>
+      )}
+
       <div className="bottom-buttons">
         <motion.button
           className="icon-button shop"
@@ -137,6 +169,19 @@ export const HomeScreen: React.FC<HomeScreenProps> = ({
         >
           <Trophy size={30} />
           <span>じっせき</span>
+        </motion.button>
+
+        <motion.button
+          className="icon-button settings"
+          onClick={toggleDifficulty}
+          whileHover={{ scale: 1.1 }}
+          whileTap={{ scale: 0.9 }}
+          initial={{ y: 50, opacity: 0 }}
+          animate={{ y: 0, opacity: 1 }}
+          transition={{ delay: 0.6 }}
+        >
+          <Settings size={30} />
+          <span>むずかしさ</span>
         </motion.button>
       </div>
 

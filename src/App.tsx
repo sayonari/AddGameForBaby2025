@@ -16,6 +16,10 @@ function App() {
   const [gameState, setGameState] = useState<GameState>('home');
   const [gameMode, setGameMode] = useState<GameMode>('timeAttack');
   const [lastScore, setLastScore] = useState(0);
+  const [gameDifficulty, setGameDifficulty] = useState(() => {
+    const saved = localStorage.getItem('gameDifficulty');
+    return saved ? parseInt(saved) : 1;
+  });
   const [player, setPlayer] = useState<Player>(() => {
     const saved = localStorage.getItem('mathGamePlayer');
     if (saved) {
@@ -148,6 +152,7 @@ function App() {
           <GameScreen
             key="game"
             mode={gameMode}
+            difficulty={gameDifficulty}
             player={player}
             onEndGame={handleEndGame}
             onGoHome={handleGoHome}
@@ -157,6 +162,7 @@ function App() {
         {gameState === 'playing' && gameMode === 'voice' && (
           <VoiceGameScreen
             key="voice-game"
+            difficulty={gameDifficulty}
             player={player}
             onEndGame={handleEndGame}
             onGoHome={handleGoHome}

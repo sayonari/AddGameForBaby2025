@@ -51,7 +51,14 @@ export const NumberPad: React.FC<NumberPadProps> = ({
           >
             <span className="number-label">{button.label}</span>
             <span className="number-dots">
-              {Array(button.value).fill('●').join(' ')}
+              {button.value === 0 ? '' : 
+                Array(button.value).fill('●').map((dot, i) => (
+                  <span key={i}>
+                    {dot}
+                    {(i + 1) % 5 === 0 && i + 1 < button.value && <br />}
+                  </span>
+                ))
+              }
             </span>
           </motion.button>
         ))}
