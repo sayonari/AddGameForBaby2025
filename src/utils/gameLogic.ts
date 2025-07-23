@@ -1,6 +1,6 @@
 import type { Problem } from '../types/game';
 
-export const generateProblem = (level: number, difficulty: number = 1): Problem => {
+export const generateProblem = (level: number, difficulty: number = 1, previousProblem?: Problem): Problem => {
   let min = 1;
   let max = 5;
   
@@ -28,8 +28,25 @@ export const generateProblem = (level: number, difficulty: number = 1): Problem 
   const levelBonus = Math.floor(level / 10);
   max = Math.min(max + levelBonus, 25);
   
-  const num1 = Math.floor(Math.random() * (max - min + 1)) + min;
-  const num2 = Math.floor(Math.random() * (max - min + 1)) + min;
+  let num1, num2;
+  let attempts = 0;
+  const maxAttempts = 20;
+  
+  // 前回と同じ問題にならないように生成
+  do {
+    num1 = Math.floor(Math.random() * (max - min + 1)) + min;
+    num2 = Math.floor(Math.random() * (max - min + 1)) + min;
+    attempts++;
+    
+    // 無限ループを防ぐため、試行回数に制限を設ける
+    if (attempts >= maxAttempts) {
+      break;
+    }
+  } while (
+    previousProblem &&
+    ((num1 === previousProblem.num1 && num2 === previousProblem.num2) ||
+     (num1 === previousProblem.num2 && num2 === previousProblem.num1))
+  );
   
   return {
     num1,

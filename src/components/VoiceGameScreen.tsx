@@ -17,6 +17,7 @@ interface VoiceGameScreenProps {
 
 export const VoiceGameScreen: React.FC<VoiceGameScreenProps> = ({ difficulty, onGoHome }) => {
   const [problem, setProblem] = useState<Problem>(() => generateProblem(1, difficulty));
+  const [previousProblem, setPreviousProblem] = useState<Problem | undefined>(undefined);
   const [userAnswer, setUserAnswer] = useState<string>('');
   const [score, setScore] = useState(0);
   const [streak, setStreak] = useState(0);
@@ -67,7 +68,8 @@ export const VoiceGameScreen: React.FC<VoiceGameScreenProps> = ({ difficulty, on
         setProblemCount(prev => prev + 1);
 
         setTimeout(() => {
-          setProblem(generateProblem(level, difficulty));
+          setPreviousProblem(problem);
+          setProblem(generateProblem(level, difficulty, problem));
           setUserAnswer('');
           setIsCorrect(null);
         }, 2000);
@@ -83,7 +85,7 @@ export const VoiceGameScreen: React.FC<VoiceGameScreenProps> = ({ difficulty, on
         }, 1500);
       }
     }, 500);
-  }, [problem, streak, level]);
+  }, [problem, streak, level, difficulty]);
 
   const toggleListening = () => {
     if (isListening) {

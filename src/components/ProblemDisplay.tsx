@@ -16,8 +16,10 @@ export const ProblemDisplay: React.FC<ProblemDisplayProps> = ({ problem, isCorre
   
   const renderVisualNumber = (num: number) => {
     const items = [];
+    const maxVisualItems = 10; // 視覚的な表示は最大10個まで
+    const displayCount = Math.min(num, maxVisualItems);
     
-    for (let i = 0; i < num; i++) {
+    for (let i = 0; i < displayCount; i++) {
       items.push(
         <motion.span
           key={i}
@@ -31,13 +33,28 @@ export const ProblemDisplay: React.FC<ProblemDisplayProps> = ({ problem, isCorre
       );
     }
     
+    // 10個を超える場合は「...」を表示
+    if (num > maxVisualItems) {
+      items.push(
+        <motion.span
+          key="more"
+          className="visual-more"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ delay: 0.5 }}
+        >
+          +{num - maxVisualItems}
+        </motion.span>
+      );
+    }
+    
     return <div className="visual-number">{items}</div>;
   };
 
   return (
     <div className="problem-display">
       <div className="problem-visual">
-        {level <= 2 && (
+        {level <= 2 && problem.num1 <= 15 && problem.num2 <= 15 && (
           <>
             <div className="number-group">
               {renderVisualNumber(problem.num1)}

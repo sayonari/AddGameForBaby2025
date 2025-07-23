@@ -51,6 +51,10 @@
     font-size: 1.5rem;
   }
   
+  .visual-more {
+    font-size: 1.2rem;
+  }
+  
   .problem-text {
     font-size: 3rem;
     gap: 15px;
@@ -138,6 +142,10 @@
   
   .visual-item {
     font-size: 1.2rem;
+  }
+  
+  .visual-more {
+    font-size: 1rem;
   }
   
   .number-text {

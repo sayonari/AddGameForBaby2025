@@ -18,6 +18,7 @@ interface GameScreenProps {
 
 export const GameScreen: React.FC<GameScreenProps> = ({ mode, difficulty, onEndGame, onGoHome }) => {
   const [problem, setProblem] = useState<Problem>(() => generateProblem(1, difficulty));
+  const [previousProblem, setPreviousProblem] = useState<Problem | undefined>(undefined);
   const [userAnswer, setUserAnswer] = useState<string>('');
   const [score, setScore] = useState(0);
   const [streak, setStreak] = useState(0);
@@ -106,7 +107,8 @@ export const GameScreen: React.FC<GameScreenProps> = ({ mode, difficulty, onEndG
       setCorrectCount(prev => prev + 1);
 
       setTimeout(() => {
-        setProblem(generateProblem(level, difficulty));
+        setPreviousProblem(problem);
+        setProblem(generateProblem(level, difficulty, problem));
         setUserAnswer('');
         setIsCorrect(null);
       }, 1500);
