@@ -11,10 +11,10 @@ export const DifficultySelector: React.FC<DifficultySelectorProps> = ({
   onDifficultyChange 
 }) => {
   const difficulties = [
-    { level: 1, label: 'かんたん', range: '1〜5', color: '#4facfe' },
-    { level: 2, label: 'ふつう', range: '1〜10', color: '#667eea' },
-    { level: 3, label: 'むずかしい', range: '5〜15', color: '#764ba2' },
-    { level: 4, label: 'とてもむずかしい', range: '10〜20', color: '#f5576c' },
+    { level: 1, label: '3さい', range: 'くりあがりなし', description: '1〜5のたしざん', color: '#4facfe' },
+    { level: 2, label: '4さい', range: 'くりあがりあり', description: '1〜9のたしざん', color: '#667eea' },
+    { level: 3, label: '5さい', range: '2けたもでるよ', description: '1けた+2けた', color: '#764ba2' },
+    { level: 4, label: '6さい', range: '2けたどうし', description: '10〜20のたしざん', color: '#f5576c' },
   ];
 
   return (
@@ -36,6 +36,7 @@ export const DifficultySelector: React.FC<DifficultySelectorProps> = ({
           >
             <span className="difficulty-label">{diff.label}</span>
             <span className="difficulty-range">{diff.range}</span>
+            <span className="difficulty-description">{diff.description}</span>
           </motion.button>
         ))}
       </div>
