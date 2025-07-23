@@ -666,6 +666,8 @@ body {
   max-width: min(100%, 700px);
   width: 100%;
   min-height: 80vh;
+  max-height: 90vh;
+  overflow-y: auto;
   box-shadow: 0 20px 60px rgba(0, 0, 0, 0.1);
 }
 
@@ -880,6 +882,8 @@ body {
   max-width: min(100%, 700px);
   width: 100%;
   min-height: 80vh;
+  max-height: 90vh;
+  overflow-y: auto;
   box-shadow: 0 20px 60px rgba(0, 0, 0, 0.1);
 }
 
@@ -1173,6 +1177,29 @@ body {
 .difficulty-description {
   font-size: 0.8rem;
   opacity: 0.7;
+}
+
+/* Scrollbar styling for achievements and shop screens */
+.shop-screen::-webkit-scrollbar,
+.achievements-screen::-webkit-scrollbar {
+  width: 8px;
+}
+
+.shop-screen::-webkit-scrollbar-track,
+.achievements-screen::-webkit-scrollbar-track {
+  background: rgba(0, 0, 0, 0.05);
+  border-radius: 4px;
+}
+
+.shop-screen::-webkit-scrollbar-thumb,
+.achievements-screen::-webkit-scrollbar-thumb {
+  background: rgba(102, 126, 234, 0.5);
+  border-radius: 4px;
+}
+
+.shop-screen::-webkit-scrollbar-thumb:hover,
+.achievements-screen::-webkit-scrollbar-thumb:hover {
+  background: rgba(102, 126, 234, 0.7);
 }
 
 /* Responsive Design */

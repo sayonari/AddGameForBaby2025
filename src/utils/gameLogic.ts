@@ -85,9 +85,6 @@ export const generateProblem = (level: number, difficulty: number = 1, previousP
     answer: num1 + num2,
   };
   
-  // 履歴に追加
-  problemHistory.addProblem(problem);
-  
   return problem;
 };
 

@@ -5,6 +5,7 @@ import type { GameMode, Problem, Player } from '../types/game';
 import { generateProblem, checkAnswer, formatTime } from '../utils/gameLogic';
 import { speechService } from '../utils/speech';
 import { soundService } from '../utils/sound';
+import { problemHistory } from '../utils/problemHistory';
 import { NumberPad } from './NumberPad';
 import { ProblemDisplay } from './ProblemDisplay';
 
@@ -36,8 +37,13 @@ export const GameScreen: React.FC<GameScreenProps> = ({ mode, difficulty, onEndG
         soundService.playBGM();
       }
     });
+    // ゲーム開始時に履歴をクリア
+    problemHistory.clear();
+    
     return () => {
       soundService.stopBGM();
+      // ゲーム終了時にも履歴をクリア
+      problemHistory.clear();
     };
   }, []);
 
@@ -90,6 +96,9 @@ export const GameScreen: React.FC<GameScreenProps> = ({ mode, difficulty, onEndG
 
     const answer = parseInt(userAnswer);
     const correct = checkAnswer(problem, answer);
+
+    // 問題を履歴に追加（答えを送信した後）
+    problemHistory.addProblem(problem);
 
     if (correct) {
       soundService.playSound('correct');
@@ -149,7 +158,10 @@ export const GameScreen: React.FC<GameScreenProps> = ({ mode, difficulty, onEndG
   return (
     <div className="game-screen game-screen-playing">
       <div className="game-header">
-        <button className="home-button" onClick={onGoHome}>
+        <button className="home-button" onClick={() => {
+          problemHistory.clear();
+          onGoHome();
+        }}>
           <Home size={30} />
         </button>
         
