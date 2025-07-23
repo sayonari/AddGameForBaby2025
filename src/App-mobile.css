@@ -9,345 +9,150 @@
   .app {
     height: -webkit-fill-available;
   }
-  
-  .game-screen-playing {
-    height: calc(100vh - 40px);
-    height: calc(-webkit-fill-available - 40px);
-    display: flex;
-    flex-direction: column;
-    overflow: hidden;
-    touch-action: none;
-  }
 }
 
-/* Game screen adjustments for mobile */
-@media (max-height: 850px) {
-  .game-screen {
-    padding: 15px;
-    max-height: calc(100vh - 30px);
-  }
-  
-  .game-header {
-    margin-bottom: 15px;
-    gap: 10px;
-  }
-  
-  .score-display {
-    font-size: 1.2rem;
-  }
-  
-  .timer {
-    font-size: 1.2rem;
-  }
-  
-  .problem-display {
-    margin-bottom: 15px;
-  }
-  
-  .problem-visual {
-    gap: 15px;
-    margin-bottom: 15px;
-  }
-  
-  .visual-item {
-    font-size: 1.5rem;
-  }
-  
-  .visual-more {
-    font-size: 1.2rem;
-  }
-  
-  /* Problem text removed - only visual display with emojis */
-  
-  .operator {
-    font-size: 2.5rem;
-  }
-  
-  .answer-display {
-    margin-bottom: 15px;
-  }
-  
-  .answer-box {
-    font-size: 2.5rem;
-    padding: 15px 40px;
-  }
-  
-  .number-pad {
-    gap: 10px;
-  }
-  
-  .number-grid {
-    gap: 10px;
-    grid-template-columns: repeat(3, 1fr);
-  }
-  
-  .number-button {
-    padding: 12px;
-    font-size: 1.3rem;
-  }
-  
-  .number-label {
-    font-size: 1.5rem;
-  }
-  
-  .number-dots {
-    font-size: 0.6rem;
-  }
-  
-  /* Action buttons now integrated in number grid */
-  .action-button {
-    padding: 10px 15px;
-    font-size: 1rem;
-    gap: 5px;
-  }
-  
-  .action-button svg {
-    width: 20px;
-    height: 20px;
-  }
-}
-
-/* Even smaller screens (iPhone SE, etc.) */
-@media (max-height: 700px) {
-  .game-screen {
-    padding: 10px;
-  }
-  
-  .game-header {
-    margin-bottom: 10px;
-  }
-  
+/* Touch interaction improvements */
+@media (hover: none) and (pointer: coarse) {
+  /* Increase touch targets */
   .home-button,
-  .mute-button {
-    padding: 8px;
+  .mute-button,
+  .number-button,
+  .action-button,
+  .mode-button,
+  .icon-button {
+    -webkit-tap-highlight-color: transparent;
+    touch-action: manipulation;
   }
   
-  .home-button svg,
-  .mute-button svg {
-    width: 24px;
-    height: 24px;
-  }
-  
+  /* Prevent text selection on game elements */
+  .game-screen,
+  .number-pad,
   .problem-display {
-    margin-bottom: 10px;
-  }
-  
-  .problem-visual {
-    margin-bottom: 10px;
-  }
-  
-  .visual-item {
-    font-size: 1.2rem;
-  }
-  
-  .visual-more {
-    font-size: 1rem;
-  }
-  
-  .number-text {
-    font-size: 1.2rem;
-  }
-  
-  /* Problem text removed - only visual display with emojis */
-  
-  .operator {
-    font-size: 2rem;
-  }
-  
-  .answer-box {
-    font-size: 2rem;
-    padding: 10px 30px;
-  }
-  
-  .number-button {
-    padding: 10px;
-    font-size: 1.2rem;
-  }
-  
-  .feedback {
-    font-size: 1.2rem;
-    padding: 10px 20px;
+    -webkit-user-select: none;
+    user-select: none;
   }
 }
 
-/* Landscape orientation adjustments */
+/* iOS Safari specific fixes */
+@supports (-webkit-appearance: none) and (stroke-color: transparent) {
+  .app {
+    /* Prevent rubber band scrolling */
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+  }
+}
+
+/* Landscape adjustments for phones */
 @media (orientation: landscape) and (max-height: 500px) {
+  .app-container {
+    --design-width: 1024;
+    --design-height: 600;
+  }
+  
   .game-screen {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    grid-template-rows: auto 1fr;
-    gap: 15px;
+    height: 500px;
   }
   
-  .game-header {
-    grid-column: 1 / -1;
-    margin-bottom: 0;
-  }
-  
-  .problem-display {
-    margin: 0;
-  }
-  
-  .answer-display {
-    margin-bottom: 10px;
-  }
-  
-  .number-pad {
-    display: flex;
+  .game-content {
     flex-direction: row;
-    align-items: center;
-    gap: 15px;
+    gap: 20px;
   }
   
-  .number-grid {
+  .problem-display,
+  .answer-display {
     flex: 1;
   }
-}
-
-/* Voice game screen mobile adjustments */
-@media (max-height: 850px) {
-  .voice-game-screen {
-    padding: 15px;
-  }
   
-  .voice-button {
-    width: 100px;
-    height: 100px;
-  }
-  
-  .voice-button svg {
-    width: 40px;
-    height: 40px;
-  }
-  
-  .voice-tips {
-    padding: 15px;
-    margin-top: 15px;
-  }
-  
-  .voice-tips h3 {
-    font-size: 1rem;
-  }
-  
-  .voice-tips ul {
-    font-size: 0.9rem;
+  .number-pad {
+    flex: 1;
+    margin-top: 0;
   }
 }
 
-/* Shop and achievements screens mobile */
-@media (max-height: 850px) {
+/* Small phones (iPhone SE, etc.) */
+@media (max-width: 375px) and (max-height: 667px) {
+  .app-container {
+    --design-width: 375;
+    --design-height: 667;
+  }
+}
+
+/* Medium phones */
+@media (min-width: 376px) and (max-width: 414px) and (max-height: 896px) {
+  .app-container {
+    --design-width: 414;
+    --design-height: 896;
+  }
+}
+
+/* Large phones and small tablets */
+@media (min-width: 415px) and (max-width: 768px) and (orientation: portrait) {
+  .app-container {
+    --design-width: 768;
+    --design-height: 1024;
+  }
+}
+
+/* Tablets in landscape */
+@media (min-width: 769px) and (orientation: landscape) {
+  .app-container {
+    --design-width: 1024;
+    --design-height: 768;
+  }
+}
+
+/* Ensure interactive elements remain clickable after scaling */
+.app-container * {
+  /* Prevent issues with scaled touch targets */
+  transform-style: preserve-3d;
+}
+
+/* Fix for achievement notification positioning */
+.achievement-notification {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  /* Account for scaling */
+  transform-origin: top right;
+}
+
+/* Voice game specific mobile adjustments */
+.voice-button {
+  /* Ensure voice button is easily tappable */
+  min-width: 100px;
+  min-height: 100px;
+}
+
+/* Scrollbar improvements for touch devices */
+@media (hover: none) {
+  .shop-screen::-webkit-scrollbar,
+  .achievements-screen::-webkit-scrollbar {
+    width: 0;
+    display: none;
+  }
+  
   .shop-screen,
   .achievements-screen {
-    padding: 20px;
-    max-height: calc(100vh - 40px);
-    overflow-y: auto;
-  }
-  
-  .shop-header h1,
-  .achievements-header h1 {
-    font-size: 2rem;
-  }
-  
-  .shop-items {
-    gap: 15px;
-  }
-  
-  .shop-item {
-    padding: 15px;
-  }
-  
-  .achievements-grid {
-    gap: 15px;
-    grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
-  }
-  
-  .achievement-item {
-    padding: 15px;
-    min-height: 120px;
-  }
-  
-  .achievement-icon {
-    font-size: 2.5rem;
-    height: 50px;
-  }
-  
-  .achievement-item h3 {
-    font-size: 0.9rem;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
   }
 }
 
-/* Home screen mobile adjustments */
-@media (max-height: 850px) {
-  .home-screen {
-    padding: 30px 20px;
-  }
-  
-  .title h1 {
-    font-size: 2.5rem;
-  }
-  
-  .subtitle {
-    font-size: 1.2rem;
-  }
-  
-  .game-modes {
-    gap: 15px;
-  }
-  
-  .mode-button {
-    padding: 15px 20px;
-    font-size: 1.1rem;
-  }
-  
-  .mode-icon {
-    font-size: 1.8rem;
-  }
-  
-  .bottom-buttons {
-    gap: 15px;
-  }
-  
-  .icon-button {
-    padding: 12px 20px;
-    font-size: 1rem;
-  }
-  
-  .icon-button svg {
-    width: 25px;
-    height: 25px;
+/* Prevent zoom on input focus (iOS) */
+@media (hover: none) and (pointer: coarse) {
+  input,
+  select,
+  textarea {
+    font-size: 16px !important;
   }
 }
 
-/* Result screen mobile adjustments */
-@media (max-height: 850px) {
-  .result-screen {
-    padding: 30px 20px;
-  }
-  
-  .result-title {
-    font-size: 2rem;
-    margin-bottom: 20px;
-  }
-  
-  .score-summary {
-    gap: 15px;
-    margin-bottom: 30px;
-  }
-  
-  .score-item h3 {
-    font-size: 1rem;
-  }
-  
-  .score-value {
-    font-size: 2rem;
-  }
-  
-  .result-buttons {
-    gap: 15px;
-  }
-  
-  .result-button {
-    padding: 15px 25px;
-    font-size: 1.1rem;
+/* Safe area insets for devices with notches */
+@supports (padding: max(0px)) {
+  .app-container {
+    padding: env(safe-area-inset-top) env(safe-area-inset-right) env(safe-area-inset-bottom) env(safe-area-inset-left);
   }
 }

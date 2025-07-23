@@ -11,6 +11,7 @@ import { ShopScreen } from './components/ShopScreen';
 import { AchievementsScreen } from './components/AchievementsScreen';
 import { checkAchievements, checkPurchaseAchievements } from './utils/achievements';
 import { motion } from 'framer-motion';
+import { initializeScaling } from './utils/scaling';
 
 function App() {
   const [gameState, setGameState] = useState<GameState>('home');
@@ -48,6 +49,11 @@ function App() {
   useEffect(() => {
     localStorage.setItem('mathGamePlayer', JSON.stringify(player));
   }, [player]);
+
+  useEffect(() => {
+    // Initialize viewport scaling
+    initializeScaling();
+  }, []);
 
   const handleStartGame = (mode: GameMode) => {
     setGameMode(mode);
@@ -138,79 +144,81 @@ function App() {
 
   return (
     <div className="app">
-      <AnimatePresence mode="wait">
-        {gameState === 'home' && (
-          <HomeScreen
-            key="home"
-            onStartGame={handleStartGame}
-            onOpenShop={handleOpenShop}
-            onOpenAchievements={handleOpenAchievements}
-          />
-        )}
+      <div className="app-container">
+        <AnimatePresence mode="wait">
+          {gameState === 'home' && (
+            <HomeScreen
+              key="home"
+              onStartGame={handleStartGame}
+              onOpenShop={handleOpenShop}
+              onOpenAchievements={handleOpenAchievements}
+            />
+          )}
+          
+          {gameState === 'playing' && gameMode !== 'voice' && (
+            <GameScreen
+              key="game"
+              mode={gameMode}
+              difficulty={gameDifficulty}
+              player={player}
+              onEndGame={handleEndGame}
+              onGoHome={handleGoHome}
+            />
+          )}
+          
+          {gameState === 'playing' && gameMode === 'voice' && (
+            <VoiceGameScreen
+              key="voice-game"
+              difficulty={gameDifficulty}
+              player={player}
+              onEndGame={handleEndGame}
+              onGoHome={handleGoHome}
+            />
+          )}
+          
+          {gameState === 'result' && (
+            <ResultScreen
+              key="result"
+              score={lastScore}
+              onPlayAgain={handlePlayAgain}
+              onGoHome={handleGoHome}
+            />
+          )}
+          
+          {gameState === 'shop' && (
+            <ShopScreen
+              key="shop"
+              player={player}
+              onBuyItem={handleBuyItem}
+              onGoHome={handleGoHome}
+            />
+          )}
+          
+          {gameState === 'achievements' && (
+            <AchievementsScreen
+              key="achievements"
+              player={player}
+              onGoHome={handleGoHome}
+            />
+          )}
+        </AnimatePresence>
         
-        {gameState === 'playing' && gameMode !== 'voice' && (
-          <GameScreen
-            key="game"
-            mode={gameMode}
-            difficulty={gameDifficulty}
-            player={player}
-            onEndGame={handleEndGame}
-            onGoHome={handleGoHome}
-          />
+        {showAchievementNotification && (
+          <motion.div
+            className="achievement-notification"
+            initial={{ x: 300, opacity: 0 }}
+            animate={{ x: 0, opacity: 1 }}
+            exit={{ x: 300, opacity: 0 }}
+            transition={{ type: "spring", stiffness: 200, damping: 20 }}
+          >
+            <div className="notification-icon">{showAchievementNotification.icon}</div>
+            <div className="notification-content">
+              <h3>じっせいかいじょ！</h3>
+              <p>{showAchievementNotification.name}</p>
+            </div>
+          </motion.div>
         )}
-        
-        {gameState === 'playing' && gameMode === 'voice' && (
-          <VoiceGameScreen
-            key="voice-game"
-            difficulty={gameDifficulty}
-            player={player}
-            onEndGame={handleEndGame}
-            onGoHome={handleGoHome}
-          />
-        )}
-        
-        {gameState === 'result' && (
-          <ResultScreen
-            key="result"
-            score={lastScore}
-            onPlayAgain={handlePlayAgain}
-            onGoHome={handleGoHome}
-          />
-        )}
-        
-        {gameState === 'shop' && (
-          <ShopScreen
-            key="shop"
-            player={player}
-            onBuyItem={handleBuyItem}
-            onGoHome={handleGoHome}
-          />
-        )}
-        
-        {gameState === 'achievements' && (
-          <AchievementsScreen
-            key="achievements"
-            player={player}
-            onGoHome={handleGoHome}
-          />
-        )}
-      </AnimatePresence>
-      
-      {showAchievementNotification && (
-        <motion.div
-          className="achievement-notification"
-          initial={{ x: 300, opacity: 0 }}
-          animate={{ x: 0, opacity: 1 }}
-          exit={{ x: 300, opacity: 0 }}
-          transition={{ type: "spring", stiffness: 200, damping: 20 }}
-        >
-          <div className="notification-icon">{showAchievementNotification.icon}</div>
-          <div className="notification-content">
-            <h3>じっせいかいじょ！</h3>
-            <p>{showAchievementNotification.name}</p>
-          </div>
-        </motion.div>
-      )}
+      </div>
     </div>
   );
 }
