@@ -1,0 +1,355 @@
+/* Mobile and iPhone specific styles */
+
+/* Viewport height fix for mobile browsers */
+@supports (-webkit-touch-callout: none) {
+  body {
+    height: -webkit-fill-available;
+  }
+  
+  .app {
+    height: -webkit-fill-available;
+  }
+  
+  .game-screen-playing {
+    height: calc(100vh - 40px);
+    height: calc(-webkit-fill-available - 40px);
+    display: flex;
+    flex-direction: column;
+  }
+}
+
+/* Game screen adjustments for mobile */
+@media (max-height: 850px) {
+  .game-screen {
+    padding: 15px;
+    max-height: calc(100vh - 30px);
+  }
+  
+  .game-header {
+    margin-bottom: 15px;
+    gap: 10px;
+  }
+  
+  .score-display {
+    font-size: 1.2rem;
+  }
+  
+  .timer {
+    font-size: 1.2rem;
+  }
+  
+  .problem-display {
+    margin-bottom: 15px;
+  }
+  
+  .problem-visual {
+    gap: 15px;
+    margin-bottom: 15px;
+  }
+  
+  .visual-item {
+    font-size: 1.5rem;
+  }
+  
+  .problem-text {
+    font-size: 3rem;
+    gap: 15px;
+  }
+  
+  .operator {
+    font-size: 2.5rem;
+  }
+  
+  .answer-display {
+    margin-bottom: 15px;
+  }
+  
+  .answer-box {
+    font-size: 2.5rem;
+    padding: 15px 40px;
+  }
+  
+  .number-pad {
+    gap: 10px;
+  }
+  
+  .number-grid {
+    gap: 10px;
+    grid-template-columns: repeat(3, 1fr);
+  }
+  
+  .number-button {
+    padding: 12px;
+    font-size: 1.3rem;
+  }
+  
+  .number-label {
+    font-size: 1.5rem;
+  }
+  
+  .number-dots {
+    font-size: 0.6rem;
+  }
+  
+  .action-buttons {
+    gap: 10px;
+  }
+  
+  .action-button {
+    padding: 10px 15px;
+    font-size: 1rem;
+    gap: 5px;
+  }
+  
+  .action-button svg {
+    width: 20px;
+    height: 20px;
+  }
+}
+
+/* Even smaller screens (iPhone SE, etc.) */
+@media (max-height: 700px) {
+  .game-screen {
+    padding: 10px;
+  }
+  
+  .game-header {
+    margin-bottom: 10px;
+  }
+  
+  .home-button,
+  .mute-button {
+    padding: 8px;
+  }
+  
+  .home-button svg,
+  .mute-button svg {
+    width: 24px;
+    height: 24px;
+  }
+  
+  .problem-display {
+    margin-bottom: 10px;
+  }
+  
+  .problem-visual {
+    margin-bottom: 10px;
+  }
+  
+  .visual-item {
+    font-size: 1.2rem;
+  }
+  
+  .number-text {
+    font-size: 1.2rem;
+  }
+  
+  .problem-text {
+    font-size: 2.5rem;
+  }
+  
+  .operator {
+    font-size: 2rem;
+  }
+  
+  .answer-box {
+    font-size: 2rem;
+    padding: 10px 30px;
+  }
+  
+  .number-button {
+    padding: 10px;
+    font-size: 1.2rem;
+  }
+  
+  .feedback {
+    font-size: 1.5rem;
+    padding: 15px 30px;
+  }
+}
+
+/* Landscape orientation adjustments */
+@media (orientation: landscape) and (max-height: 500px) {
+  .game-screen {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: auto 1fr;
+    gap: 15px;
+  }
+  
+  .game-header {
+    grid-column: 1 / -1;
+    margin-bottom: 0;
+  }
+  
+  .problem-display {
+    margin: 0;
+  }
+  
+  .answer-display {
+    margin-bottom: 10px;
+  }
+  
+  .number-pad {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 15px;
+  }
+  
+  .number-grid {
+    flex: 1;
+  }
+  
+  .action-buttons {
+    flex-direction: column;
+  }
+}
+
+/* Voice game screen mobile adjustments */
+@media (max-height: 850px) {
+  .voice-game-screen {
+    padding: 15px;
+  }
+  
+  .voice-button {
+    width: 100px;
+    height: 100px;
+  }
+  
+  .voice-button svg {
+    width: 40px;
+    height: 40px;
+  }
+  
+  .voice-tips {
+    padding: 15px;
+    margin-top: 15px;
+  }
+  
+  .voice-tips h3 {
+    font-size: 1rem;
+  }
+  
+  .voice-tips ul {
+    font-size: 0.9rem;
+  }
+}
+
+/* Shop and achievements screens mobile */
+@media (max-height: 850px) {
+  .shop-screen,
+  .achievements-screen {
+    padding: 20px;
+    max-height: calc(100vh - 40px);
+    overflow-y: auto;
+  }
+  
+  .shop-header h1,
+  .achievements-header h1 {
+    font-size: 2rem;
+  }
+  
+  .shop-items {
+    gap: 15px;
+  }
+  
+  .shop-item {
+    padding: 15px;
+  }
+  
+  .achievements-grid {
+    gap: 15px;
+    grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+  }
+  
+  .achievement-item {
+    padding: 15px;
+    min-height: 120px;
+  }
+  
+  .achievement-icon {
+    font-size: 2.5rem;
+    height: 50px;
+  }
+  
+  .achievement-item h3 {
+    font-size: 0.9rem;
+  }
+}
+
+/* Home screen mobile adjustments */
+@media (max-height: 850px) {
+  .home-screen {
+    padding: 30px 20px;
+  }
+  
+  .title h1 {
+    font-size: 2.5rem;
+  }
+  
+  .subtitle {
+    font-size: 1.2rem;
+  }
+  
+  .game-modes {
+    gap: 15px;
+  }
+  
+  .mode-button {
+    padding: 15px 20px;
+    font-size: 1.1rem;
+  }
+  
+  .mode-icon {
+    font-size: 1.8rem;
+  }
+  
+  .bottom-buttons {
+    gap: 15px;
+  }
+  
+  .icon-button {
+    padding: 12px 20px;
+    font-size: 1rem;
+  }
+  
+  .icon-button svg {
+    width: 25px;
+    height: 25px;
+  }
+}
+
+/* Result screen mobile adjustments */
+@media (max-height: 850px) {
+  .result-screen {
+    padding: 30px 20px;
+  }
+  
+  .result-title {
+    font-size: 2rem;
+    margin-bottom: 20px;
+  }
+  
+  .score-summary {
+    gap: 15px;
+    margin-bottom: 30px;
+  }
+  
+  .score-item h3 {
+    font-size: 1rem;
+  }
+  
+  .score-value {
+    font-size: 2rem;
+  }
+  
+  .result-buttons {
+    gap: 15px;
+  }
+  
+  .result-button {
+    padding: 15px 25px;
+    font-size: 1.1rem;
+  }
+}

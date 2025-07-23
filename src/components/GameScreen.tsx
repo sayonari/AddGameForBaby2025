@@ -144,7 +144,7 @@ export const GameScreen: React.FC<GameScreenProps> = ({ mode, onEndGame, onGoHom
   };
 
   return (
-    <div className="game-screen">
+    <div className="game-screen game-screen-playing">
       <div className="game-header">
         <button className="home-button" onClick={onGoHome}>
           <Home size={30} />

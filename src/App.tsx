@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import { AnimatePresence } from 'framer-motion';
 import './App.css';
+import './App-mobile.css';
 import type { GameState, GameMode, Player } from './types/game';
 import { HomeScreen } from './components/HomeScreen';
 import { GameScreen } from './components/GameScreen';
