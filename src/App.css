@@ -295,6 +295,7 @@ body::before {
   display: flex;
   flex-direction: column;
   overflow: hidden;
+  justify-content: flex-start;
 }
 
 /* Problem Display */
@@ -386,7 +387,8 @@ body::before {
 
 /* Number Pad - Critical for mobile */
 .number-pad {
-  margin-top: auto;
+  margin-top: 10px;
+  margin-bottom: auto;
   flex-shrink: 0;
   padding: 5px;
 }

@@ -207,6 +207,22 @@ export const GameScreen: React.FC<GameScreenProps> = ({ mode, difficulty, onEndG
       </div>
 
       <div className="game-content">
+        <NumberPad
+          onNumberClick={handleNumberClick}
+          onClear={handleClear}
+          onSubmit={handleSubmit}
+          disabled={isCorrect !== null}
+        />
+        
+        <div className="answer-display">
+          <motion.div 
+            className={`answer-box ${isCorrect === true ? 'correct' : isCorrect === false ? 'incorrect' : ''}`}
+            animate={isCorrect !== null ? { scale: [1, 1.1, 1] } : {}}
+          >
+            {userAnswer || '?'}
+          </motion.div>
+        </div>
+        
         <AnimatePresence mode="wait">
           <motion.div
             key={`${problem.num1}-${problem.num2}`}
@@ -222,22 +238,6 @@ export const GameScreen: React.FC<GameScreenProps> = ({ mode, difficulty, onEndG
             />
           </motion.div>
         </AnimatePresence>
-
-        <div className="answer-display">
-          <motion.div 
-            className={`answer-box ${isCorrect === true ? 'correct' : isCorrect === false ? 'incorrect' : ''}`}
-            animate={isCorrect !== null ? { scale: [1, 1.1, 1] } : {}}
-          >
-            {userAnswer || '?'}
-          </motion.div>
-        </div>
-
-        <NumberPad
-          onNumberClick={handleNumberClick}
-          onClear={handleClear}
-          onSubmit={handleSubmit}
-          disabled={isCorrect !== null}
-        />
       </div>
 
       {isCorrect === true && (
