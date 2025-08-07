@@ -388,9 +388,13 @@ body::before {
 /* Number Pad - Critical for mobile */
 .number-pad {
   margin-top: 10px;
-  margin-bottom: auto;
   flex-shrink: 0;
   padding: 5px;
+}
+
+/* Spacer to push content to top */
+.spacer {
+  flex: 1;
 }
 
 .number-grid {
